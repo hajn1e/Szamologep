@@ -126,15 +126,15 @@ namespace Szamologep
             }
         }
 
-		private void Ablak_PreviewKeyDown(object sender, KeyEventArgs e)
-		{
+        private void Ablak_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
             // számok a felső sorban
-            if(e.Key>=Key.D0 && e.Key <= Key.D9)
+            if (e.Key >= Key.D0 && e.Key <= Key.D9)
             {
                 var ch = (char)('0' + (e.Key - Key.D0));
-				Szam_Click(new Button() { Content = ch.ToString() }, new RoutedEventArgs());
+                Szam_Click(new Button() { Content = ch.ToString() }, new RoutedEventArgs());
                 e.Handled = true; return;
-			}
+            }
 
             //számok a numpadon
 
@@ -143,28 +143,28 @@ namespace Szamologep
                 var ch = (char)('0' + (e.Key - Key.NumPad0));
                 Szam_Click(new Button() { Content = ch.ToString() }, new RoutedEventArgs());
                 e.Handled = true; return;
-			}
-			//műveletek
-			switch (e.Key)
+            }
+            //műveletek
+            switch (e.Key)
             {
                 //operátorok
                 case Key.Add:
                     Muvelet_Click(new Button() { Content = "+" }, new RoutedEventArgs());
                     e.Handled = true;
                     break;
-				case Key.Subtract:
+                case Key.Subtract:
                 case Key.OemMinus:
                     Muvelet_Click(new Button() { Content = "-" }, new RoutedEventArgs());
-                    e.Handled = true; 
+                    e.Handled = true;
                     break;
-				case Key.Multiply:
+                case Key.Multiply:
                     Muvelet_Click(new Button() { Content = "*" }, new RoutedEventArgs());
-                    e.Handled = true; 
+                    e.Handled = true;
                     break;
-				case Key.Divide:
+                case Key.Divide:
                 case Key.Oem2:
-					Muvelet_Click(new Button() { Content = "/" }, new RoutedEventArgs());
-                    e.Handled = true; 
+                    Muvelet_Click(new Button() { Content = "/" }, new RoutedEventArgs());
+                    e.Handled = true;
                     break;
 
                 //egyenlő
@@ -173,9 +173,9 @@ namespace Szamologep
                     e.Handled = true;
                     break;
 
-				//törlés
+                //törlés
                 case Key.Back: //backspace
-					BackSpace_Click(this, new RoutedEventArgs());
+                    BackSpace_Click(this, new RoutedEventArgs());
                     e.Handled = true;
                     break;
                 case Key.Delete: //Ce
@@ -193,9 +193,7 @@ namespace Szamologep
                     e.Handled = true;
                     break;
 
-			}
-
-
-		}
-	}
+            }
+        }
+    }
 }
