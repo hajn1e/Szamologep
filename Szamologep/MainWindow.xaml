@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Szamologep"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="300">
+        Title="MainWindow" Height="400" Width="310" PreviewKeyDown="Ablak_PreviewKeyDown">
+		
 	<StackPanel>
+		
 		<!---Kijelző-->
 		<TextBox x:Name="Kijelzo" Text="0" FontSize="28" HorizontalAlignment="Right" IsReadOnly="True" Margin="0,0,0,10"/>
 

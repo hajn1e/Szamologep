@@ -19,8 +19,7 @@ namespace Szamologep
     {
         public double elsoSzam = 0;
         public string muvelet = "";
-        private bool ujBevitel;
-        public bool ujBetivel = false;
+        public bool ujBevitel = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,10 +30,10 @@ namespace Szamologep
             var gomb = (Button)sender;
             var szam = gomb.Content.ToString();
 
-            if (Kijelzo.Text == "0" || ujBetivel)
+            if (Kijelzo.Text == "0" || ujBevitel)
             {
                 Kijelzo.Text = szam;
-                ujBetivel = false;
+                ujBevitel = false;
             }
             else
             {
@@ -126,5 +125,77 @@ namespace Szamologep
                 Kijelzo.Text += sep;
             }
         }
-    }
+
+		private void Ablak_PreviewKeyDown(object sender, KeyEventArgs e)
+		{
+            // számok a felső sorban
+            if(e.Key>=Key.D0 && e.Key <= Key.D9)
+            {
+                var ch = (char)('0' + (e.Key - Key.D0));
+				Szam_Click(new Button() { Content = ch.ToString() }, new RoutedEventArgs());
+                e.Handled = true; return;
+			}
+
+            //számok a numpadon
+
+            if (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+            {
+                var ch = (char)('0' + (e.Key - Key.NumPad0));
+                Szam_Click(new Button() { Content = ch.ToString() }, new RoutedEventArgs());
+                e.Handled = true; return;
+			}
+			//műveletek
+			switch (e.Key)
+            {
+                //operátorok
+                case Key.Add:
+                    Muvelet_Click(new Button() { Content = "+" }, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+				case Key.Subtract:
+                case Key.OemMinus:
+                    Muvelet_Click(new Button() { Content = "-" }, new RoutedEventArgs());
+                    e.Handled = true; 
+                    break;
+				case Key.Multiply:
+                    Muvelet_Click(new Button() { Content = "*" }, new RoutedEventArgs());
+                    e.Handled = true; 
+                    break;
+				case Key.Divide:
+                case Key.Oem2:
+					Muvelet_Click(new Button() { Content = "/" }, new RoutedEventArgs());
+                    e.Handled = true; 
+                    break;
+
+                //egyenlő
+                case Key.Enter:
+                    Egyenlo_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+
+				//törlés
+                case Key.Back: //backspace
+					BackSpace_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+                case Key.Delete: //Ce
+                    CE_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+                case Key.Escape: //C
+                    C_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+                case Key.Decimal:
+                case Key.OemComma:
+                case Key.OemPeriod:
+                    Pont_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+
+			}
+
+
+		}
+	}
 }
